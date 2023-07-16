@@ -1,27 +1,54 @@
 import './App.css';
-import { CodeBlock, monokai } from "react-code-blocks";
+//import { CodeBlock, monokai } from "react-code-blocks";
+//import axios from 'axios';
+import { useEffect, useState } from 'react';
+import QuestionService from './QuestionService';
 
-const code='def Cras mi pede, malesuada in,\nimperdiet et, commodo vulputate,\njusto. In blandit ultrices enim.\n\tLorem ipsum dolor sit amet\n\tconsectetuer adipiscing elit.';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-      <div className='codigo'>
-        <CodeBlock
-        text={code}
-        language='python'
-        showLineNumbers={true}
-        theme={monokai}
-        startingLineNumber={1}
-        codeBlock={{lineNumbers: true}}
-        wrapLines/>
-      </div>
-      </header>
-    
+      <QuestionList/>
     </div>
   );
 }
 
+
+const QuestionList = () => {
+  const [questions, setQuestions] = useState([]);
+
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const data = await QuestionService.getQuestions();
+        setQuestions(data);
+      } catch (error) {
+        // Manejo del error
+      }
+    };
+
+    fetchQuestions();
+  }, []);
+
+  return (
+    <div>
+      <h2>Lista de Preguntas</h2>
+      <ul>
+        {questions.map((question) => (
+          <li key={question.id}>
+            <strong>ID:</strong> {question.id}
+            <br />
+            <strong>Dificultad:</strong> {question.dificultad}
+            <br />
+            <strong>Pregunta:</strong> {question.pregunta}
+            <br />
+            <strong>Respuesta:</strong> {question.respuesta}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default App;
