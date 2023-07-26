@@ -4,6 +4,8 @@ import QuestionBasic from "./PreguntasBasicas";
 import QuestionMedium from "./PreguntasIntermedias";
 import QuestionHigh from "./PreguntasAvanzadas";
 import AgregarPregunta from './IngresarPregunta';
+import Navbar from './Navbar';
+import logopython from './Python-logo.svg';
 
 
 function Menu() {
@@ -31,20 +33,24 @@ function Menu() {
       };
 
       return(
-        <div align='center'>
-            <div>
+        <div>
+          <Navbar/>
+          <div align='center'>
+              {showMenu && (
+              <div>
                 <h1 className='title-bold' align='center'>Ez-PyZ</h1>
                 <p className='p-thin' align='center'>Plataforma de aprendizaje de python</p>
-            </div>
-            {showMenu && (
-            <div className='button-container'>
-                <button className='btn btn-primary' onClick={() => handleMenuClick("basic")}>Cuestionario Básico</button>
-                <button className='btn btn-primary' onClick={() => handleMenuClick("mid")}>Cuestionario Intermedio</button>
-                <button className='btn btn-primary' onClick={() => handleMenuClick("hi")}>Cuestionario Avanzado</button>
-                <button className='btn btn-primary' onClick={() => handleMenuClick("agregar")}>Agregar Pregunta</button>
-            </div>
-            )}
-            {renderSelectedView()}
+                <div className='button-container'>
+                  <button className='btn btn-primary' onClick={() => handleMenuClick("basic")}>Cuestionario Básico</button>
+                  <button className='btn btn-primary' onClick={() => handleMenuClick("mid")}>Cuestionario Intermedio</button>
+                  <button className='btn btn-primary' onClick={() => handleMenuClick("hi")}>Cuestionario Avanzado</button>
+                  <button className='btn btn-primary' onClick={() => handleMenuClick("agregar")}>Agregar Pregunta</button>
+                </div>
+              </div>
+              
+              )}
+              {renderSelectedView()}
+          </div>
         </div>
       )
     }

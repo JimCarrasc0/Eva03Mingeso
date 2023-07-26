@@ -61,8 +61,12 @@ function QuestionHigh ({ setShowMenu }) {
       else{
         alert(`Tu nota es:${score/4} Tiempo transcurrido: ${timer} segundos.`);
       }
-      
+      window.location.href="/";
     };
+
+    const volver = () => {
+      window.location.href="/";
+    }
   
     return (
       <div>{showQuestion && (
@@ -71,6 +75,7 @@ function QuestionHigh ({ setShowMenu }) {
           <p>Tiempo: {timer} (s) Puntaje: {score}</p>
           {questions.map((question) => (
             <div key={question.id}>
+              <p>¿Qué imprime por pantalla?</p>
               <div className='codigo'>
                 <CodeBlock
                 text={question.pregunta}
@@ -91,7 +96,10 @@ function QuestionHigh ({ setShowMenu }) {
               </div>
             </div>
           ))}
-          <button type='button' className='btn btn-primary' onClick={handleSubmit}>Terminar prueba</button>
+          <div className="button-container">
+          <button type='button' className='btn btn-success' onClick={handleSubmit}>Terminar prueba</button>
+          <button type='button' className='btn btn-danger' onClick={volver}>Volver</button>
+        </div>
         </div>
       )}
     </div>

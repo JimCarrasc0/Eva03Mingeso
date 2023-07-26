@@ -26,16 +26,24 @@ function AgregarPregunta ({ setShowMenu }) {
                 setRespuesta('');
                 setShowMenu(true);
                 setShowQuestion(false);
+
+                window.location.href="/";
             })
           .catch((error) => {
             console.error('Error al guardar la pregunta', error);
           });
+    }
+
+    const volver = () => {
+        window.location.href="/";
       }
     
 
     return(
         <div>{showQuestion && (
+            
         <div className="cuestionario">
+            <h2>Añade tu pregunta</h2>
             <form onSubmit={handleSubmit}>
                 <div class="form-group">
                     <label for="dificultad">Dificultad</label>
@@ -65,11 +73,12 @@ function AgregarPregunta ({ setShowMenu }) {
                     placeholder="Ingrese la respuesta del ejercicio"
                     value={respuesta}
                     onChange={(e) => setRespuesta(e.target.value)}
-                    />
+                    required minlength="1"/>
                 </div>
 
                 <div className='button-container'>
                     <button className='btn btn-success' type="submit">Guardar</button>
+                    <button type='button' className='btn btn-danger' onClick={volver}>Volver</button>
                 </div>
             </form>    
         </div>
